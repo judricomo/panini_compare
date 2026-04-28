@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panini — Comparador de Fichas</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=Archivo+Narrow:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F5F2EB;
+    --surface: #FFFFFF;
+    --surface2: #EDE9E0;
+    --border: #D6D1C5;
+    --border2: #C2BAA8;
+    --text: #1A1814;
+    --text2: #6B6358;
+    --text3: #9A9086;
+    --accent: #D4501A;
+    --accent-bg: #FBF0EB;
+    --accent-text: #8B2E08;
+    --green: #2A7A4F;
+    --green-bg: #E6F5ED;
+    --green-text: #1A5435;
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+
+  body {
+    font-family: 'Archivo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  header {
+    background: var(--text);
+    color: var(--bg);
+    padding: 2rem 2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border: 2px solid rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: 60px;
+    width: 120px; height: 120px;
+    border: 2px solid rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+
+  .header-eyebrow {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  header h1 {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    max-width: 420px;
+    line-height: 1.5;
+  }
+
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 560px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  .field-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text2);
+    margin-bottom: 6px;
+    font-family: 'Archivo Narrow', sans-serif;
+  }
+
+  .field-hint {
+    font-size: 12px;
+    color: var(--text3);
+    margin-bottom: 8px;
+    font-family: 'Archivo', sans-serif;
+  }
+
+  textarea {
+    font-family: 'Courier New', monospace;
+    font-size: 12.5px;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    background: var(--surface);
+    color: var(--text);
+    resize: vertical;
+    line-height: 1.6;
+    min-height: 220px;
+    transition: border-color 0.15s;
+  }
+
+  textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .btn {
+    width: 100%;
+    padding: 14px 24px;
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn:hover { background: #333028; }
+  .btn:active { transform: scale(0.99); }
+
+  .btn-icon {
+    width: 18px; height: 18px;
+    border: 1.5px solid currentColor;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+
+  #output { margin-top: 2rem; }
+
+  .result-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .result-title {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text2);
+  }
+
+  .result-summary {
+    font-size: 13px;
+    color: var(--text3);
+  }
+
+  .result-table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .result-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .result-row:last-child { border-bottom: none; }
+  .result-row:nth-child(even) { background: var(--surface2); }
+
+  .team-badge {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 8px;
+    min-width: 44px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .sticker-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    flex: 1;
+  }
+
+  .chip {
+    font-size: 12px;
+    font-weight: 500;
+    background: #F0EDE6;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 8px;
+    color: var(--text);
+  }
+
+  .chip.multi {
+    background: var(--green-bg);
+    border-color: #A3D4B8;
+    color: var(--green-text);
+    font-weight: 700;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    color: var(--text3);
+    font-size: 14px;
+  }
+
+  .error-msg {
+    color: var(--accent);
+    font-size: 13px;
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  .legend {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  .legend-chip {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 4px;
+    padding: 1px 7px;
+  }
+
+  .legend-chip.normal {
+    background: #F0EDE6;
+    border: 1px solid var(--border);
+    color: var(--text2);
+  }
+
+  .legend-chip.multi {
+    background: var(--green-bg);
+    border: 1px solid #A3D4B8;
+    color: var(--green-text);
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px;
+    color: var(--text3);
+    border-top: 1px solid var(--border);
+  }
+
+  .instructions {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .instr-title {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text2);
+    margin-bottom: 1rem;
+  }
+
+  .instr-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 560px) {
+    .instr-steps { grid-template-columns: 1fr; }
+  }
+
+  .instr-step {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'Archivo Narrow', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  .step-text {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+
+  .step-text strong {
+    font-weight: 500;
+    color: var(--text);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .step-example {
+    margin-top: 4px;
+    color: var(--text3);
+  }
+
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1px 5px;
+    color: var(--text);
+  }
+
+  .instr-note {
+    font-size: 12px;
+    color: var(--text3);
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div style="max-width: 860px; margin: 0 auto;">
+    <div class="header-eyebrow">FIFA World Cup 2026</div>
+    <h1>Comparador<br>de Fichas Panini</h1>
+    <p>Pega las repetidas de tu amigo y tus faltantes para saber exactamente qué fichas te sirven.</p>
+  </div>
+</header>
+
+<main>
+  <div class="instructions">
+    <div class="instr-title">¿Cómo usar?</div>
+    <div class="instr-steps">
+      <div class="instr-step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <strong>Repetidas de tu amigo</strong> — Pega la lista de fichas que tu amigo tiene repetidas. El formato es: <code>SELECCIÓN: número(cantidadx)</code>
+          <div class="step-example">Ej: <code>IRQ: 4(2x), 5(1x), 7(2x)</code></div>
+        </div>
+      </div>
+      <div class="instr-step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <strong>Mis fichas faltantes</strong> — Pega las fichas que a ti te faltan. El formato es: <code>SELECCIÓN: número, número</code>
+          <div class="step-example">Ej: <code>IRQ: 1, 2, 4, 5, 6, 7</code></div>
+        </div>
+      </div>
+      <div class="instr-step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>Ver fichas que me sirven</strong> — Haz clic en el botón y el comparador te muestra exactamente qué fichas de las repetidas de tu amigo te faltan a ti.
+        </div>
+      </div>
+      <div class="instr-step">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <strong>Copiar resultado</strong> — Usa el botón de copiar para llevarte el resultado en el mismo formato. Puedes compartirlo por WhatsApp o usarlo como entrada en otra comparación.
+        </div>
+      </div>
+    </div>
+    <div class="instr-note">
+      Las fichas en <span class="chip multi" style="font-size:11px; padding: 1px 7px;">verde</span> son las que tu amigo tiene más de una copia — puede dártela sin quedarse sin ella.
+    </div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <div class="field-label">Repetidas de tu amigo</div>
+      <div class="field-hint">Ej: IRQ: 4(2x), 5(1x), 7(2x)</div>
+      <textarea id="repeated" placeholder="FWC: 00(3x), 1(3x), 2(2x)&#10;MEX: 2(1x), 4(1x), 5(1x)&#10;BRA: 2(1x), 4(1x), 7(1x)&#10;..."></textarea>
+    </div>
+    <div>
+      <div class="field-label">Mis fichas faltantes</div>
+      <div class="field-hint">Ej: IRQ: 1, 2, 4, 5, 6</div>
+      <textarea id="missing" placeholder="FWC: 6, 7, 17&#10;MEX: 13&#10;BRA: 11, 15, 19&#10;..."></textarea>
+    </div>
+  </div>
+
+  <button class="btn" onclick="compare()">
+    <span class="btn-icon">&#10003;</span>
+    Ver fichas que me sirven
+  </button>
+
+  <div id="error" class="error-msg"></div>
+  <div id="output"></div>
+</main>
+
+<footer>
+  Comparador de fichas Panini
+</footer>
+
+<script>
+function parseRepeated(text) {
+  const result = {};
+  const lines = text.trim().split('\n');
+  for (const line of lines) {
+    const colon = line.indexOf(':');
+    if (colon === -1) continue;
+    const team = line.slice(0, colon).trim().toUpperCase();
+    const rest = line.slice(colon + 1);
+    const stickers = {};
+    const re = /(\w+)\((\d+)x\)/g;
+    let m;
+    while ((m = re.exec(rest)) !== null) {
+      stickers[m[1]] = parseInt(m[2]);
+    }
+    if (Object.keys(stickers).length > 0) result[team] = stickers;
+  }
+  return result;
+}
+
+function parseMissing(text) {
+  const result = {};
+  const lines = text.trim().split('\n');
+  for (const line of lines) {
+    const colon = line.indexOf(':');
+    if (colon === -1) continue;
+    const team = line.slice(0, colon).trim().toUpperCase();
+    const rest = line.slice(colon + 1);
+    const nums = rest.match(/\w+/g);
+    if (nums) result[team] = nums;
+  }
+  return result;
+}
+
+function compare() {
+  const repText = document.getElementById('repeated').value;
+  const misText = document.getElementById('missing').value;
+  const out = document.getElementById('output');
+  const err = document.getElementById('error');
+
+  err.textContent = '';
+
+  if (!repText.trim() || !misText.trim()) {
+    err.textContent = 'Completa ambos campos para comparar.';
+    out.innerHTML = '';
+    return;
+  }
+
+  const repeated = parseRepeated(repText);
+  const missing = parseMissing(misText);
+
+  const matches = {};
+  let totalStickers = 0;
+  let totalTeams = 0;
+
+  for (const team of Object.keys(missing)) {
+    if (!repeated[team]) continue;
+    const useful = [];
+    for (const num of missing[team]) {
+      if (repeated[team][num]) {
+        useful.push({ num, qty: repeated[team][num] });
+        totalStickers++;
+      }
+    }
+    if (useful.length > 0) {
+      matches[team] = useful;
+      totalTeams++;
+    }
+  }
+
+  if (Object.keys(matches).length === 0) {
+    out.innerHTML = '<div class="empty-state">No hay coincidencias entre las repetidas de tu amigo y tus fichas faltantes.<br><br>Verifica que el formato sea correcto.</div>';
+    return;
+  }
+
+  const teams = Object.keys(matches);
+  let copyLines = [];
+
+  let html = '<div class="result-header">';
+  html += '<span class="result-title">Fichas útiles</span>';
+  html += '<span class="result-summary">' + totalStickers + ' fichas en ' + totalTeams + ' selecciones</span>';
+  html += '</div>';
+  html += '<div class="result-table">';
+
+  for (const team of teams) {
+    html += '<div class="result-row">';
+    html += '<span class="team-badge">' + team + '</span>';
+    html += '<div class="sticker-chips">';
+    const parts = [];
+    for (const { num, qty } of matches[team]) {
+      const cls = qty > 1 ? 'chip multi' : 'chip';
+      html += '<span class="' + cls + '">' + (qty > 1 ? num + ' \xd7' + qty : num) + '</span>';
+      parts.push(num + '(' + qty + 'x)');
+    }
+    copyLines.push(team + ': ' + parts.join(', '));
+    html += '</div></div>';
+  }
+
+  html += '</div>';
+  html += '<div class="legend">';
+  html += '<div class="legend-item"><span class="legend-chip normal">14</span> Una copia disponible</div>';
+  html += '<div class="legend-item"><span class="legend-chip multi">7 \xd73</span> Varias copias disponibles</div>';
+  html += '</div>';
+  html += '<button class="btn" id="copyBtn" onclick="copyResult()" style="margin-top:16px; background: var(--surface); color: var(--text); border: 1px solid var(--border2);">Copiar resultado</button>';
+
+  window._copyText = copyLines.join('\n');
+  out.innerHTML = html;
+}
+
+function copyResult() {
+  if (!window._copyText) return;
+  navigator.clipboard.writeText(window._copyText).then(function() {
+    var btn = document.getElementById('copyBtn');
+    btn.textContent = '\u00a1Copiado!';
+    setTimeout(function() { btn.textContent = 'Copiar resultado'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>
