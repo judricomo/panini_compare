@@ -7,410 +7,99 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=Archivo+Narrow:wght@500;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #F5F2EB;
-    --surface: #FFFFFF;
-    --surface2: #EDE9E0;
-    --border: #D6D1C5;
-    --border2: #C2BAA8;
-    --text: #1A1814;
-    --text2: #6B6358;
-    --text3: #9A9086;
-    --accent: #D4501A;
-    --accent-bg: #FBF0EB;
-    --accent-text: #8B2E08;
-    --green: #2A7A4F;
-    --green-bg: #E6F5ED;
-    --green-text: #1A5435;
-    --radius: 8px;
-    --radius-lg: 12px;
+    --bg: #F5F2EB; --surface: #FFFFFF; --surface2: #EDE9E0;
+    --border: #D6D1C5; --border2: #C2BAA8;
+    --text: #1A1814; --text2: #6B6358; --text3: #9A9086;
+    --accent: #D4501A; --accent-bg: #FBF0EB; --accent-text: #8B2E08;
+    --green-bg: #E6F5ED; --green-text: #1A5435;
+    --radius: 8px; --radius-lg: 12px;
   }
-
-  body {
-    font-family: 'Archivo', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 0;
-  }
-
-  header {
-    background: var(--text);
-    color: var(--bg);
-    padding: 2rem 2rem 1.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  header::before {
-    content: '';
-    position: absolute;
-    top: -40px; right: -40px;
-    width: 180px; height: 180px;
-    border: 2px solid rgba(255,255,255,0.08);
-    border-radius: 50%;
-  }
-  header::after {
-    content: '';
-    position: absolute;
-    bottom: -60px; right: 60px;
-    width: 120px; height: 120px;
-    border: 2px solid rgba(255,255,255,0.06);
-    border-radius: 50%;
-  }
-
-  .header-eyebrow {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-
-  header h1 {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: clamp(28px, 5vw, 42px);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: #FFFFFF;
-    margin-bottom: 8px;
-  }
-
-  header p {
-    font-size: 14px;
-    color: rgba(255,255,255,0.5);
-    max-width: 420px;
-    line-height: 1.5;
-  }
-
-  main {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem 4rem;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-
-  @media (max-width: 560px) {
-    .grid { grid-template-columns: 1fr; }
-  }
-
-  .field-label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text2);
-    margin-bottom: 6px;
-    font-family: 'Archivo Narrow', sans-serif;
-  }
-
-  .field-hint {
-    font-size: 12px;
-    color: var(--text3);
-    margin-bottom: 8px;
-    font-family: 'Archivo', sans-serif;
-  }
-
-  textarea {
-    font-family: 'Courier New', monospace;
-    font-size: 12.5px;
-    width: 100%;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 12px 14px;
-    background: var(--surface);
-    color: var(--text);
-    resize: vertical;
-    line-height: 1.6;
-    min-height: 220px;
-    transition: border-color 0.15s;
-  }
-
-  textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-  }
-
-  .btn {
-    width: 100%;
-    padding: 14px 24px;
-    background: var(--text);
-    color: var(--bg);
-    border: none;
-    border-radius: var(--radius);
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    cursor: pointer;
-    transition: background 0.15s, transform 0.1s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  .btn:hover { background: #333028; }
+  body { font-family: 'Archivo', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  header { background: var(--text); color: var(--bg); padding: 2rem 2rem 1.5rem; position: relative; overflow: hidden; }
+  header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; border: 2px solid rgba(255,255,255,0.08); border-radius: 50%; }
+  header::after  { content: ''; position: absolute; bottom: -60px; right: 60px; width: 120px; height: 120px; border: 2px solid rgba(255,255,255,0.06); border-radius: 50%; }
+  .eyebrow { font-family: 'Archivo Narrow', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  header h1 { font-family: 'Archivo Narrow', sans-serif; font-size: clamp(28px, 5vw, 42px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: #FFF; margin-bottom: 8px; }
+  header p  { font-size: 14px; color: rgba(255,255,255,0.5); max-width: 460px; line-height: 1.5; }
+  main { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 700px) { .grid3 { grid-template-columns: 1fr; } }
+  .field-label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2); margin-bottom: 6px; font-family: 'Archivo Narrow', sans-serif; }
+  .field-hint  { font-size: 12px; color: var(--text3); margin-bottom: 8px; }
+  textarea { font-family: 'Courier New', monospace; font-size: 12.5px; width: 100%; border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; background: var(--surface); color: var(--text); resize: vertical; line-height: 1.6; min-height: 200px; transition: border-color 0.15s; }
+  textarea:focus { outline: none; border-color: var(--accent); }
+  .btn { width: 100%; padding: 14px 24px; background: var(--text); color: var(--bg); border: none; border-radius: var(--radius); font-family: 'Archivo Narrow', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: background 0.15s, transform 0.1s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .btn:hover  { background: #333028; }
   .btn:active { transform: scale(0.99); }
-
-  .btn-icon {
-    width: 18px; height: 18px;
-    border: 1.5px solid currentColor;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-  }
-
+  .btn.secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border2); }
+  .btn.secondary:hover { background: var(--surface2); }
+  .btn.orange { background: var(--accent); color: #fff; border: none; }
+  .btn.orange:hover { background: #b8420f; }
+  .btn.disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+  .btn-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+  @media (max-width: 560px) { .btn-row2 { grid-template-columns: 1fr; } }
   #output { margin-top: 2rem; }
-
-  .result-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 12px;
-  }
-
-  .result-title {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text2);
-  }
-
-  .result-summary {
-    font-size: 13px;
-    color: var(--text3);
-  }
-
-  .result-table {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-  }
-
-  .result-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
-  }
-
+  .result-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+  .result-title  { font-family: 'Archivo Narrow', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2); }
+  .result-summary { font-size: 13px; color: var(--text3); }
+  .result-table { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .result-row { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
   .result-row:last-child { border-bottom: none; }
   .result-row:nth-child(even) { background: var(--surface2); }
-
-  .team-badge {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text);
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2px 8px;
-    min-width: 44px;
-    text-align: center;
-    flex-shrink: 0;
-  }
-
-  .sticker-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    flex: 1;
-  }
-
-  .chip {
-    font-size: 12px;
-    font-weight: 500;
-    background: #F0EDE6;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2px 8px;
-    color: var(--text);
-  }
-
-  .chip.multi {
-    background: var(--green-bg);
-    border-color: #A3D4B8;
-    color: var(--green-text);
-    font-weight: 700;
-  }
-
-  .empty-state {
-    text-align: center;
-    padding: 3rem 2rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    color: var(--text3);
-    font-size: 14px;
-  }
-
-  .error-msg {
-    color: var(--accent);
-    font-size: 13px;
-    margin-top: 8px;
-    font-weight: 500;
-  }
-
-  .legend {
-    display: flex;
-    gap: 16px;
-    margin-top: 12px;
-    flex-wrap: wrap;
-  }
-
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: var(--text3);
-  }
-
-  .legend-chip {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 700;
-    border-radius: 4px;
-    padding: 1px 7px;
-  }
-
-  .legend-chip.normal {
-    background: #F0EDE6;
-    border: 1px solid var(--border);
-    color: var(--text2);
-  }
-
-  .legend-chip.multi {
-    background: var(--green-bg);
-    border: 1px solid #A3D4B8;
-    color: var(--green-text);
-  }
-
-  footer {
-    text-align: center;
-    padding: 2rem;
-    font-size: 12px;
-    color: var(--text3);
-    border-top: 1px solid var(--border);
-  }
-
-  .instructions {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .instr-title {
-    font-family: 'Archivo Narrow', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text2);
-    margin-bottom: 1rem;
-  }
-
-  .instr-steps {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 1rem;
-  }
-
-  @media (max-width: 560px) {
-    .instr-steps { grid-template-columns: 1fr; }
-  }
-
-  .instr-step {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-
-  .step-num {
-    flex-shrink: 0;
-    width: 22px;
-    height: 22px;
-    background: var(--text);
-    color: var(--bg);
-    border-radius: 50%;
-    font-size: 11px;
-    font-weight: 700;
-    font-family: 'Archivo Narrow', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1px;
-  }
-
-  .step-text {
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.5;
-  }
-
-  .step-text strong {
-    font-weight: 500;
-    color: var(--text);
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  .step-example {
-    margin-top: 4px;
-    color: var(--text3);
-  }
-
-  code {
-    font-family: 'Courier New', monospace;
-    font-size: 12px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 1px 5px;
-    color: var(--text);
-  }
-
-  .instr-note {
-    font-size: 12px;
-    color: var(--text3);
-    border-top: 1px solid var(--border);
-    padding-top: 10px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
+  .team-badge { font-family: 'Archivo Narrow', sans-serif; font-size: 13px; font-weight: 700; color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; min-width: 44px; text-align: center; flex-shrink: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; }
+  .chip { font-size: 12px; font-weight: 500; background: #F0EDE6; border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; color: var(--text); }
+  .chip.multi { background: var(--green-bg); border-color: #A3D4B8; color: var(--green-text); font-weight: 700; }
+  .legend { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); }
+  .lchip { display: inline-block; font-size: 11px; font-weight: 700; border-radius: 4px; padding: 1px 7px; }
+  .lchip.n { background: #F0EDE6; border: 1px solid var(--border); color: var(--text2); }
+  .lchip.m { background: var(--green-bg); border: 1px solid #A3D4B8; color: var(--green-text); }
+  .swap-box { background: var(--accent-bg); border: 1px solid #F0C4AD; border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
+  .swap-title { font-family: 'Archivo Narrow', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-text); margin-bottom: 10px; }
+  .swap-body { font-size: 14px; color: var(--text); line-height: 1.7; }
+  .swap-warn { font-size: 12px; color: var(--accent-text); margin-top: 8px; padding: 8px 12px; background: #F8DDD2; border-radius: var(--radius); border: 1px solid #F0C4AD; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .inv-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 1rem; }
+  @media (max-width: 700px) { .inv-grid { grid-template-columns: 1fr; } }
+  .inv-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .inv-block-head { padding: 10px 16px; background: var(--surface2); border-bottom: 1px solid var(--border); font-family: 'Archivo Narrow', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text2); }
+  .inv-block textarea { min-height: 140px; border: none; border-radius: 0; }
+  .copy-btns { display: flex; flex-direction: column; gap: 10px; justify-content: flex-end; }
+  .error-msg { color: var(--accent); font-size: 13px; margin-top: 8px; font-weight: 500; }
+  .empty-state { text-align: center; padding: 3rem 2rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); color: var(--text3); font-size: 14px; }
+  footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--text3); border-top: 1px solid var(--border); }
+  .instructions { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
+  .instr-title { font-family: 'Archivo Narrow', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2); margin-bottom: 1rem; }
+  .instr-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem; }
+  @media (max-width: 560px) { .instr-steps { grid-template-columns: 1fr; } }
+  .instr-step { display: flex; gap: 10px; align-items: flex-start; }
+  .step-num { flex-shrink: 0; width: 22px; height: 22px; background: var(--text); color: var(--bg); border-radius: 50%; font-size: 11px; font-weight: 700; font-family: 'Archivo Narrow', sans-serif; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .step-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
+  .step-text strong { font-weight: 500; color: var(--text); display: block; margin-bottom: 2px; }
+  .step-ex { margin-top: 4px; color: var(--text3); }
+  code { font-family: 'Courier New', monospace; font-size: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; color: var(--text); }
+  .instr-note { font-size: 12px; color: var(--text3); border-top: 1px solid var(--border); padding-top: 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .toggle-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+  .toggle-label { font-size: 14px; color: var(--text); flex: 1; }
+  .toggle-label span { font-size: 12px; color: var(--text3); display: block; margin-top: 2px; }
+  .switch { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider { position: absolute; inset: 0; background: var(--border2); border-radius: 24px; cursor: pointer; transition: background 0.2s; }
+  .slider:before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px; background: white; border-radius: 50%; transition: transform 0.2s; }
+  input:checked + .slider { background: var(--accent); }
+  input:checked + .slider:before { transform: translateX(20px); }
+  .my-rep-field { transition: opacity 0.2s; }
+  .my-rep-field.hidden { opacity: 0.35; pointer-events: none; }
 </style>
 </head>
 <body>
-
 <header>
-  <div style="max-width: 860px; margin: 0 auto;">
-    <div class="header-eyebrow">FIFA World Cup 2026</div>
+  <div style="max-width:920px;margin:0 auto;">
+    <div class="eyebrow">FIFA World Cup 2026</div>
     <h1>Comparador<br>de Fichas Panini</h1>
-    <p>Pega las repetidas de tu amigo y tus faltantes para saber exactamente qué fichas te sirven.</p>
+    <p>Compara, encuentra las fichas útiles, registra el cambio y actualiza ambos inventarios automáticamente.</p>
   </div>
 </header>
 
@@ -421,50 +110,67 @@
       <div class="instr-step">
         <div class="step-num">1</div>
         <div class="step-text">
-          <strong>Repetidas de tu amigo</strong> — Pega la lista de fichas que tu amigo tiene repetidas. El formato es: <code>SELECCIÓN: número(cantidadx)</code>
-          <div class="step-example">Ej: <code>IRQ: 4(2x), 5(1x), 7(2x)</code></div>
+          <strong>Repetidas del amigo</strong> — Fichas que él tiene de más.
+          <div class="step-ex">Ej: <code>IRQ: 4(2x), 5(1x)</code></div>
         </div>
       </div>
       <div class="instr-step">
         <div class="step-num">2</div>
         <div class="step-text">
-          <strong>Mis fichas faltantes</strong> — Pega las fichas que a ti te faltan. El formato es: <code>SELECCIÓN: número, número</code>
-          <div class="step-example">Ej: <code>IRQ: 1, 2, 4, 5, 6, 7</code></div>
+          <strong>Mis faltantes</strong> — Las que a ti te faltan.
+          <div class="step-ex">Ej: <code>IRQ: 1, 4, 5, 9</code></div>
         </div>
       </div>
       <div class="instr-step">
         <div class="step-num">3</div>
         <div class="step-text">
-          <strong>Ver fichas que me sirven</strong> — Haz clic en el botón y el comparador te muestra exactamente qué fichas de las repetidas de tu amigo te faltan a ti.
+          <strong>Mis repetidas</strong> — Las que tú tienes de más para darle.
+          <div class="step-ex">Ej: <code>BRA: 3(2x), 7(1x)</code></div>
         </div>
       </div>
       <div class="instr-step">
         <div class="step-num">4</div>
         <div class="step-text">
-          <strong>Copiar resultado</strong> — Usa el botón de copiar para llevarte el resultado en el mismo formato. Puedes compartirlo por WhatsApp o usarlo como entrada en otra comparación.
+          <strong>Registrar cambio</strong> — Descuenta las fichas intercambiadas y genera el nuevo inventario para ambos. Usa "Aplicar" para cargar los nuevos datos.
         </div>
       </div>
     </div>
     <div class="instr-note">
-      Las fichas en <span class="chip multi" style="font-size:11px; padding: 1px 7px;">verde</span> son las que tu amigo tiene más de una copia — puede dártela sin quedarse sin ella.
+      Fichas en <span class="chip multi" style="font-size:11px;padding:1px 7px;">verde</span> = el amigo tiene más de una copia.
+      La app descuenta automáticamente <strong style="color:var(--text)">N fichas de tus repetidas</strong> igual al número de fichas que él te da.
     </div>
   </div>
 
-  <div class="grid">
+  <div class="toggle-row">
+    <div class="toggle-label">
+      Incluir mis repetidas en el cambio
+      <span>Actívalo si vas a darle fichas tuyas al amigo a cambio de las que recibes</span>
+    </div>
+    <label class="switch">
+      <input type="checkbox" id="useMyRep" onchange="toggleMyRep()" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div class="grid3">
     <div>
-      <div class="field-label">Repetidas de tu amigo</div>
-      <div class="field-hint">Ej: IRQ: 4(2x), 5(1x), 7(2x)</div>
-      <textarea id="repeated" placeholder="FWC: 00(3x), 1(3x), 2(2x)&#10;MEX: 2(1x), 4(1x), 5(1x)&#10;BRA: 2(1x), 4(1x), 7(1x)&#10;..."></textarea>
+      <div class="field-label">Repetidas del amigo</div>
+      <div class="field-hint">Ej: IRQ: 4(2x), 5(1x)</div>
+      <textarea id="repeated" placeholder="FWC: 00(3x), 1(3x)&#10;MEX: 2(1x), 4(1x)&#10;BRA: 2(1x), 7(1x)&#10;..."></textarea>
     </div>
     <div>
       <div class="field-label">Mis fichas faltantes</div>
-      <div class="field-hint">Ej: IRQ: 1, 2, 4, 5, 6</div>
-      <textarea id="missing" placeholder="FWC: 6, 7, 17&#10;MEX: 13&#10;BRA: 11, 15, 19&#10;..."></textarea>
+      <div class="field-hint">Ej: IRQ: 1, 2, 4, 5</div>
+      <textarea id="missing" placeholder="FWC: 6, 7, 17&#10;MEX: 13&#10;BRA: 11, 15&#10;..."></textarea>
+    </div>
+    <div id="myRepField" class="my-rep-field">
+      <div class="field-label">Mis repetidas</div>
+      <div class="field-hint">Ej: BRA: 3(2x), 7(1x)</div>
+      <textarea id="myrepeated" placeholder="BRA: 3(2x), 7(1x)&#10;SCO: 11(3x)&#10;..."></textarea>
     </div>
   </div>
 
   <button class="btn" onclick="compare()">
-    <span class="btn-icon">&#10003;</span>
+    <span style="width:18px;height:18px;border:1.5px solid currentColor;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">&#10003;</span>
     Ver fichas que me sirven
   </button>
 
@@ -472,126 +178,232 @@
   <div id="output"></div>
 </main>
 
-<footer>
-  Comparador de fichas Panini
-</footer>
+<footer>Comparador de fichas Panini &mdash; </footer>
 
 <script>
+var _matches = null, _repeated = null, _missing = null, _myrepeated = null;
+
 function parseRepeated(text) {
-  const result = {};
-  const lines = text.trim().split('\n');
-  for (const line of lines) {
-    const colon = line.indexOf(':');
-    if (colon === -1) continue;
-    const team = line.slice(0, colon).trim().toUpperCase();
-    const rest = line.slice(colon + 1);
-    const stickers = {};
-    const re = /(\w+)\((\d+)x\)/g;
-    let m;
-    while ((m = re.exec(rest)) !== null) {
-      stickers[m[1]] = parseInt(m[2]);
-    }
-    if (Object.keys(stickers).length > 0) result[team] = stickers;
+  var result = {}, lines = text.trim().split('\n');
+  for (var i = 0; i < lines.length; i++) {
+    var ci = lines[i].indexOf(':'); if (ci === -1) continue;
+    var team = lines[i].slice(0, ci).trim().toUpperCase();
+    var rest = lines[i].slice(ci + 1), st = {}, re = /(\w+)\((\d+)x\)/g, m;
+    while ((m = re.exec(rest)) !== null) st[m[1]] = parseInt(m[2]);
+    if (Object.keys(st).length) result[team] = st;
   }
   return result;
 }
 
 function parseMissing(text) {
-  const result = {};
-  const lines = text.trim().split('\n');
-  for (const line of lines) {
-    const colon = line.indexOf(':');
-    if (colon === -1) continue;
-    const team = line.slice(0, colon).trim().toUpperCase();
-    const rest = line.slice(colon + 1);
-    const nums = rest.match(/\w+/g);
+  var result = {}, lines = text.trim().split('\n');
+  for (var i = 0; i < lines.length; i++) {
+    var ci = lines[i].indexOf(':'); if (ci === -1) continue;
+    var team = lines[i].slice(0, ci).trim().toUpperCase();
+    var nums = lines[i].slice(ci + 1).match(/\w+/g);
     if (nums) result[team] = nums;
   }
   return result;
 }
 
+function serRep(obj) {
+  var lines = [];
+  Object.keys(obj).forEach(function(t) {
+    var nums = Object.keys(obj[t]); if (!nums.length) return;
+    lines.push(t + ': ' + nums.map(function(n){ return n+'('+obj[t][n]+'x)'; }).join(', '));
+  });
+  return lines.join('\n');
+}
+
+function serMis(obj) {
+  var lines = [];
+  Object.keys(obj).forEach(function(t) {
+    if (!obj[t].length) return;
+    lines.push(t + ': ' + obj[t].join(', '));
+  });
+  return lines.join('\n');
+}
+
+function cpRep(obj) {
+  var r = {};
+  Object.keys(obj).forEach(function(t){ r[t] = Object.assign({}, obj[t]); });
+  return r;
+}
+function cpMis(obj) {
+  var r = {};
+  Object.keys(obj).forEach(function(t){ r[t] = obj[t].slice(); });
+  return r;
+}
+
 function compare() {
-  const repText = document.getElementById('repeated').value;
-  const misText = document.getElementById('missing').value;
-  const out = document.getElementById('output');
-  const err = document.getElementById('error');
-
+  var repTxt = document.getElementById('repeated').value;
+  var misTxt = document.getElementById('missing').value;
+  var myTxt  = document.getElementById('myrepeated').value;
+  var out = document.getElementById('output'), err = document.getElementById('error');
   err.textContent = '';
+  if (!repTxt.trim() || !misTxt.trim()) { err.textContent = 'Completa los campos de repetidas del amigo y tus faltantes.'; out.innerHTML = ''; return; }
 
-  if (!repText.trim() || !misText.trim()) {
-    err.textContent = 'Completa ambos campos para comparar.';
-    out.innerHTML = '';
+  _repeated   = parseRepeated(repTxt);
+  _missing    = parseMissing(misTxt);
+  _myrepeated = myTxt.trim() ? parseRepeated(myTxt) : {};
+
+  var matches = {}, totalFichas = 0;
+  Object.keys(_missing).forEach(function(team) {
+    if (!_repeated[team]) return;
+    var useful = [];
+    _missing[team].forEach(function(num) {
+      if (_repeated[team][num]) { useful.push({ num: num, qty: _repeated[team][num] }); totalFichas++; }
+    });
+    if (useful.length) matches[team] = useful;
+  });
+
+  _matches = matches;
+
+  if (!Object.keys(matches).length) {
+    out.innerHTML = '<div class="empty-state">No hay coincidencias entre las repetidas del amigo y tus faltantes.</div>';
     return;
   }
 
-  const repeated = parseRepeated(repText);
-  const missing = parseMissing(misText);
-
-  const matches = {};
-  let totalStickers = 0;
-  let totalTeams = 0;
-
-  for (const team of Object.keys(missing)) {
-    if (!repeated[team]) continue;
-    const useful = [];
-    for (const num of missing[team]) {
-      if (repeated[team][num]) {
-        useful.push({ num, qty: repeated[team][num] });
-        totalStickers++;
-      }
-    }
-    if (useful.length > 0) {
-      matches[team] = useful;
-      totalTeams++;
-    }
-  }
-
-  if (Object.keys(matches).length === 0) {
-    out.innerHTML = '<div class="empty-state">No hay coincidencias entre las repetidas de tu amigo y tus fichas faltantes.<br><br>Verifica que el formato sea correcto.</div>';
-    return;
-  }
-
-  const teams = Object.keys(matches);
-  let copyLines = [];
-
-  let html = '<div class="result-header">';
-  html += '<span class="result-title">Fichas útiles</span>';
-  html += '<span class="result-summary">' + totalStickers + ' fichas en ' + totalTeams + ' selecciones</span>';
-  html += '</div>';
-  html += '<div class="result-table">';
-
-  for (const team of teams) {
-    html += '<div class="result-row">';
-    html += '<span class="team-badge">' + team + '</span>';
-    html += '<div class="sticker-chips">';
-    const parts = [];
-    for (const { num, qty } of matches[team]) {
-      const cls = qty > 1 ? 'chip multi' : 'chip';
-      html += '<span class="' + cls + '">' + (qty > 1 ? num + ' \xd7' + qty : num) + '</span>';
-      parts.push(num + '(' + qty + 'x)');
-    }
-    copyLines.push(team + ': ' + parts.join(', '));
-    html += '</div></div>';
-  }
-
-  html += '</div>';
-  html += '<div class="legend">';
-  html += '<div class="legend-item"><span class="legend-chip normal">14</span> Una copia disponible</div>';
-  html += '<div class="legend-item"><span class="legend-chip multi">7 \xd73</span> Varias copias disponibles</div>';
-  html += '</div>';
-  html += '<button class="btn" id="copyBtn" onclick="copyResult()" style="margin-top:16px; background: var(--surface); color: var(--text); border: 1px solid var(--border2);">Copiar resultado</button>';
+  var copyLines = [], tableHtml = '<div class="result-table">';
+  Object.keys(matches).forEach(function(team) {
+    var parts = [];
+    tableHtml += '<div class="result-row"><span class="team-badge">'+team+'</span><div class="chips">';
+    matches[team].forEach(function(f) {
+      tableHtml += '<span class="chip'+(f.qty>1?' multi':'')+'">'+f.num+(f.qty>1?' \xd7'+f.qty:'')+'</span>';
+      parts.push(f.num+'('+f.qty+'x)');
+    });
+    tableHtml += '</div></div>';
+    copyLines.push(team+': '+parts.join(', '));
+  });
+  tableHtml += '</div>';
 
   window._copyText = copyLines.join('\n');
+
+  var myTotal = 0;
+  Object.keys(_myrepeated).forEach(function(t){ Object.keys(_myrepeated[t]).forEach(function(n){ myTotal += _myrepeated[t][n]; }); });
+
+  var useMyRep = document.getElementById('useMyRep').checked;
+  var hasMyRep = useMyRep && myTxt.trim() !== '';
+  var swapNote = !useMyRep
+    ? 'El amigo te da <strong>'+totalFichas+'</strong> fichas. Solo se actualizarán sus repetidas y tus faltantes.'
+    : hasMyRep
+      ? 'El amigo te da <strong>'+totalFichas+'</strong> fichas &mdash; tú le das <strong>'+totalFichas+'</strong> de tus repetidas. Tienes <strong>'+myTotal+'</strong> disponibles.'
+      : 'El amigo te da <strong>'+totalFichas+'</strong> fichas. Agrega tus repetidas para poder registrar el cambio.';
+  var canSwap = !useMyRep || (hasMyRep && myTotal >= totalFichas);
+
+  var html = '';
+  html += '<div class="result-header"><span class="result-title">Fichas \u00fatiles del amigo</span><span class="result-summary">'+totalFichas+' ficha(s) en '+Object.keys(matches).length+' selecci\u00f3n(es)</span></div>';
+  html += tableHtml;
+  html += '<div class="legend"><div class="legend-item"><span class="lchip n">14</span> Una copia</div><div class="legend-item"><span class="lchip m">7 \xd73</span> Varias copias</div></div>';
+  html += '<div class="swap-box" style="margin-top:1.5rem;"><div class="swap-title">Resumen del cambio</div><div class="swap-body">'+swapNote+'</div>';
+  if (hasMyRep && !canSwap) html += '<div class="swap-warn">Atenci\u00f3n: te faltan '+(totalFichas - myTotal)+' ficha(s) para completar el cambio.</div>';
+  html += '</div>';
+  html += '<div class="btn-row2">';
+  html += '<button class="btn secondary" id="copyBtn" onclick="copyResult()">Copiar fichas \u00fatiles</button>';
+  if (!useMyRep) {
+    html += '<button class="btn orange" onclick="registerSwap()">Registrar cambio &#8594;</button>';
+  } else if (hasMyRep) {
+    html += '<button class="btn orange" onclick="registerSwap()">Registrar cambio &#8594;</button>';
+  } else {
+    html += '<button class="btn secondary disabled">Registrar cambio (agrega tus repetidas)</button>';
+  }
+  html += '</div>';
+  html += '<div id="newInventory"></div>';
   out.innerHTML = html;
 }
 
 function copyResult() {
   if (!window._copyText) return;
   navigator.clipboard.writeText(window._copyText).then(function() {
-    var btn = document.getElementById('copyBtn');
+    var btn = document.getElementById('copyBtn'); if (!btn) return;
     btn.textContent = '\u00a1Copiado!';
-    setTimeout(function() { btn.textContent = 'Copiar resultado'; }, 2000);
+    setTimeout(function(){ btn.textContent = 'Copiar fichas \u00fatiles'; }, 2000);
   });
+}
+
+function registerSwap() {
+  if (!_matches || !_repeated || !_missing || !_myrepeated) return;
+  var newRep  = cpRep(_repeated);
+  var newMis  = cpMis(_missing);
+  var newMyRep = cpRep(_myrepeated);
+
+  var totalTaken = 0;
+  Object.keys(_matches).forEach(function(team) {
+    _matches[team].forEach(function(f) {
+      if (newRep[team] && newRep[team][f.num]) {
+        newRep[team][f.num]--;
+        if (newRep[team][f.num] <= 0) delete newRep[team][f.num];
+        if (!Object.keys(newRep[team]).length) delete newRep[team];
+      }
+      if (newMis[team]) {
+        newMis[team] = newMis[team].filter(function(n){ return n !== f.num; });
+        if (!newMis[team].length) delete newMis[team];
+      }
+      totalTaken++;
+    });
+  });
+
+  var remaining = totalTaken;
+  var myTeams = Object.keys(newMyRep);
+  for (var i = 0; i < myTeams.length && remaining > 0; i++) {
+    var t = myTeams[i], nums = Object.keys(newMyRep[t]);
+    for (var j = 0; j < nums.length && remaining > 0; j++) {
+      var n = nums[j], give = Math.min(newMyRep[t][n], remaining);
+      newMyRep[t][n] -= give; remaining -= give;
+      if (newMyRep[t][n] <= 0) delete newMyRep[t][n];
+    }
+    if (!Object.keys(newMyRep[t]).length) delete newMyRep[t];
+  }
+
+  var nRepTxt   = serRep(newRep)   || '(sin repetidas)';
+  var nMisTxt   = serMis(newMis)   || '(sin faltantes)';
+  var nMyRepTxt = serRep(newMyRep) || '(sin repetidas)';
+
+  var withMyRep = document.getElementById('useMyRep').checked && myTxt.trim() !== '';
+  var gridCols  = withMyRep ? '1fr 1fr 1fr' : '1fr 1fr';
+  var html = '<hr class="divider">';
+  html += '<div class="result-header"><span class="result-title">Nuevo inventario tras el cambio</span></div>';
+  html += '<div class="inv-grid" style="grid-template-columns:'+gridCols+'">';
+  html += '<div class="inv-block"><div class="inv-block-head">Repetidas del amigo</div><textarea id="nRepTA">'+nRepTxt+'</textarea></div>';
+  html += '<div class="inv-block"><div class="inv-block-head">Mis faltantes</div><textarea id="nMisTA">'+nMisTxt+'</textarea></div>';
+  if (withMyRep) html += '<div class="inv-block"><div class="inv-block-head">Mis repetidas</div><textarea id="nMyRepTA">'+nMyRepTxt+'</textarea></div>';
+  html += '</div>';
+  html += '<div class="btn-row2" style="margin-top:12px;">';
+  html += '<div style="display:flex;flex-direction:column;gap:8px;">';
+  html += '<button class="btn secondary" onclick="copyNew(\'nRepTA\',this)">Copiar repetidas del amigo</button>';
+  html += '<button class="btn secondary" onclick="copyNew(\'nMisTA\',this)">Copiar mis faltantes</button>';
+  if (withMyRep) html += '<button class="btn secondary" onclick="copyNew(\'nMyRepTA\',this)">Copiar mis repetidas</button>';
+  html += '</div>';
+  html += '<button class="btn orange" style="align-self:stretch;" onclick="applyNew()">Usar como nuevo punto de partida &#8594;</button>';
+  html += '</div>';
+
+  document.getElementById('newInventory').innerHTML = html;
+  document.getElementById('newInventory').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function copyNew(id, btn) {
+  var ta = document.getElementById(id); if (!ta) return;
+  navigator.clipboard.writeText(ta.value).then(function() {
+    var orig = btn.textContent; btn.textContent = '\u00a1Copiado!';
+    setTimeout(function(){ btn.textContent = orig; }, 2000);
+  });
+}
+
+function applyNew() {
+  var r = document.getElementById('nRepTA'), m = document.getElementById('nMisTA'), mr = document.getElementById('nMyRepTA');
+  if (!r || !m) return;
+  document.getElementById('repeated').value   = r.value  === '(sin repetidas)' ? '' : r.value;
+  document.getElementById('missing').value    = m.value  === '(sin faltantes)'  ? '' : m.value;
+  if (mr) document.getElementById('myrepeated').value = mr.value === '(sin repetidas)' ? '' : mr.value;
+  document.getElementById('output').innerHTML = '';
+  document.getElementById('error').textContent = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleMyRep() {
+  var chk = document.getElementById('useMyRep');
+  var field = document.getElementById('myRepField');
+  if (field) field.classList.toggle('hidden', !chk.checked);
 }
 </script>
 </body>
