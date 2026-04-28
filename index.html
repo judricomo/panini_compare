@@ -13,6 +13,7 @@
     --text: #1A1814; --text2: #6B6358; --text3: #9A9086;
     --accent: #D4501A; --accent-bg: #FBF0EB; --accent-text: #8B2E08;
     --green-bg: #E6F5ED; --green-text: #1A5435;
+    --blue-bg: #EBF3FB; --blue-border: #A3C4E0; --blue-text: #1A4F7A;
     --radius: 8px; --radius-lg: 12px;
   }
   body { font-family: 'Archivo', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
@@ -20,56 +21,12 @@
   header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; border: 2px solid rgba(255,255,255,0.08); border-radius: 50%; }
   header::after  { content: ''; position: absolute; bottom: -60px; right: 60px; width: 120px; height: 120px; border: 2px solid rgba(255,255,255,0.06); border-radius: 50%; }
   .eyebrow { font-family: 'Archivo Narrow', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-  header h1 { font-family: 'Archivo Narrow', sans-serif; font-size: clamp(28px, 5vw, 42px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: #FFF; margin-bottom: 8px; }
-  header p  { font-size: 14px; color: rgba(255,255,255,0.5); max-width: 460px; line-height: 1.5; }
-  main { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-  @media (max-width: 700px) { .grid3 { grid-template-columns: 1fr; } }
-  .field-label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2); margin-bottom: 6px; font-family: 'Archivo Narrow', sans-serif; }
-  .field-hint  { font-size: 12px; color: var(--text3); margin-bottom: 8px; }
-  textarea { font-family: 'Courier New', monospace; font-size: 12.5px; width: 100%; border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; background: var(--surface); color: var(--text); resize: vertical; line-height: 1.6; min-height: 200px; transition: border-color 0.15s; }
-  textarea:focus { outline: none; border-color: var(--accent); }
-  .btn { width: 100%; padding: 14px 24px; background: var(--text); color: var(--bg); border: none; border-radius: var(--radius); font-family: 'Archivo Narrow', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: background 0.15s, transform 0.1s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .btn:hover  { background: #333028; }
-  .btn:active { transform: scale(0.99); }
-  .btn.secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border2); }
-  .btn.secondary:hover { background: var(--surface2); }
-  .btn.orange { background: var(--accent); color: #fff; border: none; }
-  .btn.orange:hover { background: #b8420f; }
-  .btn.disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
-  .btn-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
-  @media (max-width: 560px) { .btn-row2 { grid-template-columns: 1fr; } }
-  #output { margin-top: 2rem; }
-  .result-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
-  .result-title  { font-family: 'Archivo Narrow', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2); }
-  .result-summary { font-size: 13px; color: var(--text3); }
-  .result-table { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-  .result-row { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
-  .result-row:last-child { border-bottom: none; }
-  .result-row:nth-child(even) { background: var(--surface2); }
-  .team-badge { font-family: 'Archivo Narrow', sans-serif; font-size: 13px; font-weight: 700; color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; min-width: 44px; text-align: center; flex-shrink: 0; }
-  .chips { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; }
-  .chip { font-size: 12px; font-weight: 500; background: #F0EDE6; border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; color: var(--text); }
-  .chip.multi { background: var(--green-bg); border-color: #A3D4B8; color: var(--green-text); font-weight: 700; }
-  .legend { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
-  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); }
-  .lchip { display: inline-block; font-size: 11px; font-weight: 700; border-radius: 4px; padding: 1px 7px; }
-  .lchip.n { background: #F0EDE6; border: 1px solid var(--border); color: var(--text2); }
-  .lchip.m { background: var(--green-bg); border: 1px solid #A3D4B8; color: var(--green-text); }
-  .swap-box { background: var(--accent-bg); border: 1px solid #F0C4AD; border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
-  .swap-title { font-family: 'Archivo Narrow', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-text); margin-bottom: 10px; }
-  .swap-body { font-size: 14px; color: var(--text); line-height: 1.7; }
-  .swap-warn { font-size: 12px; color: var(--accent-text); margin-top: 8px; padding: 8px 12px; background: #F8DDD2; border-radius: var(--radius); border: 1px solid #F0C4AD; }
-  .divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
-  .inv-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 1rem; }
-  @media (max-width: 700px) { .inv-grid { grid-template-columns: 1fr; } }
-  .inv-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-  .inv-block-head { padding: 10px 16px; background: var(--surface2); border-bottom: 1px solid var(--border); font-family: 'Archivo Narrow', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text2); }
-  .inv-block textarea { min-height: 140px; border: none; border-radius: 0; }
-  .copy-btns { display: flex; flex-direction: column; gap: 10px; justify-content: flex-end; }
-  .error-msg { color: var(--accent); font-size: 13px; margin-top: 8px; font-weight: 500; }
-  .empty-state { text-align: center; padding: 3rem 2rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); color: var(--text3); font-size: 14px; }
-  footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--text3); border-top: 1px solid var(--border); }
+  header h1 { font-family: 'Archivo Narrow', sans-serif; font-size: clamp(26px, 5vw, 40px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: #FFF; margin-bottom: 8px; }
+  header p  { font-size: 14px; color: rgba(255,255,255,0.5); max-width: 500px; line-height: 1.5; }
+
+  main { max-width: 980px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* Instructions */
   .instructions { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
   .instr-title { font-family: 'Archivo Narrow', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2); margin-bottom: 1rem; }
   .instr-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem; }
@@ -78,28 +35,109 @@
   .step-num { flex-shrink: 0; width: 22px; height: 22px; background: var(--text); color: var(--bg); border-radius: 50%; font-size: 11px; font-weight: 700; font-family: 'Archivo Narrow', sans-serif; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
   .step-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
   .step-text strong { font-weight: 500; color: var(--text); display: block; margin-bottom: 2px; }
-  .step-ex { margin-top: 4px; color: var(--text3); }
+  .step-ex { margin-top: 4px; color: var(--text3); font-size: 12px; }
   code { font-family: 'Courier New', monospace; font-size: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; color: var(--text); }
-  .instr-note { font-size: 12px; color: var(--text3); border-top: 1px solid var(--border); padding-top: 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-  .toggle-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
-  .toggle-label { font-size: 14px; color: var(--text); flex: 1; }
-  .toggle-label span { font-size: 12px; color: var(--text3); display: block; margin-top: 2px; }
-  .switch { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
-  .switch input { opacity: 0; width: 0; height: 0; }
-  .slider { position: absolute; inset: 0; background: var(--border2); border-radius: 24px; cursor: pointer; transition: background 0.2s; }
-  .slider:before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px; background: white; border-radius: 50%; transition: transform 0.2s; }
-  input:checked + .slider { background: var(--accent); }
-  input:checked + .slider:before { transform: translateX(20px); }
-  .my-rep-field { transition: opacity 0.2s; }
-  .my-rep-field.hidden { opacity: 0.35; pointer-events: none; }
+  .instr-note { font-size: 12px; color: var(--text3); border-top: 1px solid var(--border); padding-top: 10px; line-height: 1.6; }
+
+  /* Fields grid: 2x2 */
+  .grid2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 16px; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  @media (max-width: 640px) { .grid2x2 { grid-template-columns: 1fr; } }
+
+  .field-panel { padding: 16px; }
+  .field-panel.mine  { background: var(--surface); }
+  .field-panel.friend { background: #F8F6F1; }
+  .field-panel:nth-child(1) { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .field-panel:nth-child(2) { border-bottom: 1px solid var(--border); }
+  .field-panel:nth-child(3) { border-right: 1px solid var(--border); }
+  @media (max-width: 640px) {
+    .field-panel:nth-child(1), .field-panel:nth-child(2), .field-panel:nth-child(3) { border-right: none; border-bottom: 1px solid var(--border); }
+    .field-panel:nth-child(4) { border: none; }
+  }
+
+  .panel-owner { font-family: 'Archivo Narrow', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .panel-owner.me     { color: var(--accent); }
+  .panel-owner.friend { color: var(--blue-text); }
+  .field-label { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .field-hint  { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+
+  textarea { font-family: 'Courier New', monospace; font-size: 12px; width: 100%; border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; background: var(--surface); color: var(--text); resize: vertical; line-height: 1.6; min-height: 180px; transition: border-color 0.15s; }
+  textarea:focus { outline: none; border-color: var(--accent); }
+  .field-panel.friend textarea { background: #F8F6F1; }
+
+  /* Buttons */
+  .btn { width: 100%; padding: 13px 24px; background: var(--text); color: var(--bg); border: none; border-radius: var(--radius); font-family: 'Archivo Narrow', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: background 0.15s, transform 0.1s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .btn:hover  { background: #333028; }
+  .btn:active { transform: scale(0.99); }
+  .btn.secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border2); }
+  .btn.secondary:hover { background: var(--surface2); }
+  .btn.orange { background: var(--accent); color: #fff; border: none; }
+  .btn.orange:hover { background: #b8420f; }
+  .btn.disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+  .btn-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+  @media (max-width: 560px) { .btn-row2 { grid-template-columns: 1fr; } }
+
+  /* Results */
+  #output { margin-top: 2rem; }
+  .results-split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 1.5rem; }
+  @media (max-width: 640px) { .results-split { grid-template-columns: 1fr; } }
+
+  .result-block { }
+  .result-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 6px; }
+  .result-title  { font-family: 'Archivo Narrow', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2); }
+  .result-summary { font-size: 12px; color: var(--text3); }
+
+  .result-table { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .result-row { display: flex; align-items: center; gap: 10px; padding: 8px 14px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .result-row:last-child { border-bottom: none; }
+  .result-row:nth-child(even) { background: var(--surface2); }
+  .team-badge { font-family: 'Archivo Narrow', sans-serif; font-size: 12px; font-weight: 700; color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 7px; min-width: 42px; text-align: center; flex-shrink: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; flex: 1; }
+  .chip { font-size: 11px; font-weight: 500; background: #F0EDE6; border: 1px solid var(--border); border-radius: 4px; padding: 1px 7px; color: var(--text); }
+  .chip.multi  { background: var(--green-bg); border-color: #A3D4B8; color: var(--green-text); font-weight: 700; }
+  .chip.blue   { background: var(--blue-bg);  border-color: var(--blue-border); color: var(--blue-text); font-weight: 700; }
+
+  .legend { display: flex; gap: 14px; margin-top: 10px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text3); }
+  .lchip { display: inline-block; font-size: 10px; font-weight: 700; border-radius: 3px; padding: 1px 6px; }
+  .lchip.n  { background: #F0EDE6; border: 1px solid var(--border); color: var(--text2); }
+  .lchip.g  { background: var(--green-bg); border: 1px solid #A3D4B8; color: var(--green-text); }
+  .lchip.b  { background: var(--blue-bg);  border: 1px solid var(--blue-border); color: var(--blue-text); }
+
+  .swap-box { background: var(--accent-bg); border: 1px solid #F0C4AD; border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 1rem; }
+  .swap-title { font-family: 'Archivo Narrow', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-text); margin-bottom: 8px; }
+  .swap-body  { font-size: 14px; color: var(--text); line-height: 1.7; }
+  .swap-warn  { font-size: 12px; color: var(--accent-text); margin-top: 8px; padding: 8px 12px; background: #F8DDD2; border-radius: var(--radius); border: 1px solid #F0C4AD; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+  /* New inventory grid */
+  .inv-grid4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; margin-top: 1rem; }
+  .inv-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1rem; }
+  @media (max-width: 700px) { .inv-grid4, .inv-grid2 { grid-template-columns: 1fr; } }
+  .inv-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .inv-block-head { padding: 8px 14px; background: var(--surface2); border-bottom: 1px solid var(--border); font-family: 'Archivo Narrow', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text2); }
+  .inv-block-head.me     { border-left: 3px solid var(--accent); }
+  .inv-block-head.friend { border-left: 3px solid var(--blue-text); }
+  .inv-block textarea { min-height: 120px; border: none; border-radius: 0; font-size: 12px; }
+
+  .copy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  @media (max-width: 560px) { .copy-grid { grid-template-columns: 1fr; } }
+
+  .empty-state { text-align: center; padding: 2.5rem 2rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); color: var(--text3); font-size: 14px; }
+  .error-msg { color: var(--accent); font-size: 13px; margin-top: 8px; font-weight: 500; }
+  footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--text3); border-top: 1px solid var(--border); }
+
+  .section-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; margin-bottom: 12px; }
+  .section-tag.me { background: var(--accent-bg); color: var(--accent-text); border: 1px solid #F0C4AD; }
+  .section-tag.friend { background: var(--blue-bg); color: var(--blue-text); border: 1px solid var(--blue-border); }
 </style>
 </head>
 <body>
 <header>
-  <div style="max-width:920px;margin:0 auto;">
+  <div style="max-width:980px;margin:0 auto;">
     <div class="eyebrow">FIFA World Cup 2026</div>
-    <h1>Comparador<br>de Fichas Panini</h1>
-    <p>Compara, encuentra las fichas útiles, registra el cambio y actualiza ambos inventarios automáticamente.</p>
+    <h1>Comparador de Fichas Panini</h1>
+    <p>Compara en ambas direcciones, registra el cambio y actualiza los 4 inventarios automáticamente.</p>
   </div>
 </header>
 
@@ -110,78 +148,79 @@
       <div class="instr-step">
         <div class="step-num">1</div>
         <div class="step-text">
-          <strong>Repetidas del amigo</strong> — Fichas que él tiene de más.
-          <div class="step-ex">Ej: <code>IRQ: 4(2x), 5(1x)</code></div>
+          <strong>Mis repetidas + Faltantes del amigo</strong> — La app calcula qué fichas tuyas le sirven a él.
+          <div class="step-ex">Repetidas: <code>BRA: 3(2x), 7(1x)</code> &nbsp;|&nbsp; Faltantes: <code>BRA: 3, 7, 11</code></div>
         </div>
       </div>
       <div class="instr-step">
         <div class="step-num">2</div>
         <div class="step-text">
-          <strong>Mis faltantes</strong> — Las que a ti te faltan.
-          <div class="step-ex">Ej: <code>IRQ: 1, 4, 5, 9</code></div>
+          <strong>Repetidas del amigo + Mis faltantes</strong> — La app calcula qué fichas de él te sirven a ti.
+          <div class="step-ex">Repetidas: <code>IRQ: 4(2x), 5(1x)</code> &nbsp;|&nbsp; Faltantes: <code>IRQ: 1, 4, 5</code></div>
         </div>
       </div>
       <div class="instr-step">
         <div class="step-num">3</div>
         <div class="step-text">
-          <strong>Mis repetidas</strong> — Las que tú tienes de más para darle.
-          <div class="step-ex">Ej: <code>BRA: 3(2x), 7(1x)</code></div>
+          <strong>Comparar</strong> — Muestra las fichas útiles en ambas direcciones y el resumen del cambio: cuántas fichas se intercambian y si el cambio es parejo.
         </div>
       </div>
       <div class="instr-step">
         <div class="step-num">4</div>
         <div class="step-text">
-          <strong>Registrar cambio</strong> — Descuenta las fichas intercambiadas y genera el nuevo inventario para ambos. Usa "Aplicar" para cargar los nuevos datos.
+          <strong>Registrar cambio</strong> — Actualiza los 4 inventarios: repetidas del amigo, mis faltantes, mis repetidas y faltantes del amigo.
         </div>
       </div>
     </div>
     <div class="instr-note">
-      Fichas en <span class="chip multi" style="font-size:11px;padding:1px 7px;">verde</span> = el amigo tiene más de una copia.
-      La app descuenta automáticamente <strong style="color:var(--text)">N fichas de tus repetidas</strong> igual al número de fichas que él te da.
+      Los campos de <strong>Mis repetidas</strong> y <strong>Faltantes del amigo</strong> son opcionales. Si los dejas vacíos, la comparación funciona igual pero el cambio solo actualiza los dos inventarios que tengan datos. Los campos del amigo son opcionales: puedes solo comparar en una dirección.
     </div>
   </div>
 
-  <div class="toggle-row">
-    <div class="toggle-label">
-      Incluir mis repetidas en el cambio
-      <span>Actívalo si vas a darle fichas tuyas al amigo a cambio de las que recibes</span>
-    </div>
-    <label class="switch">
-      <input type="checkbox" id="useMyRep" onchange="toggleMyRep()" checked>
-      <span class="slider"></span>
-    </label>
-  </div>
-  <div class="grid3">
-    <div>
-      <div class="field-label">Repetidas del amigo</div>
-      <div class="field-hint">Ej: IRQ: 4(2x), 5(1x)</div>
-      <textarea id="repeated" placeholder="FWC: 00(3x), 1(3x)&#10;MEX: 2(1x), 4(1x)&#10;BRA: 2(1x), 7(1x)&#10;..."></textarea>
-    </div>
-    <div>
-      <div class="field-label">Mis fichas faltantes</div>
-      <div class="field-hint">Ej: IRQ: 1, 2, 4, 5</div>
-      <textarea id="missing" placeholder="FWC: 6, 7, 17&#10;MEX: 13&#10;BRA: 11, 15&#10;..."></textarea>
-    </div>
-    <div id="myRepField" class="my-rep-field">
+  <!-- 2x2 input grid -->
+  <div class="grid2x2">
+    <!-- Row 1: Repetidas -->
+    <div class="field-panel mine">
+      <div class="panel-owner me">Yo</div>
       <div class="field-label">Mis repetidas</div>
       <div class="field-hint">Ej: BRA: 3(2x), 7(1x)</div>
       <textarea id="myrepeated" placeholder="BRA: 3(2x), 7(1x)&#10;SCO: 11(3x)&#10;..."></textarea>
+    </div>
+    <div class="field-panel friend">
+      <div class="panel-owner friend">Amigo</div>
+      <div class="field-label">Repetidas del amigo</div>
+      <div class="field-hint">Ej: IRQ: 4(2x), 5(1x)</div>
+      <textarea id="repeated" placeholder="FWC: 00(3x), 1(3x)&#10;MEX: 2(1x), 4(1x)&#10;..."></textarea>
+    </div>
+    <!-- Row 2: Faltantes -->
+    <div class="field-panel mine">
+      <div class="panel-owner me">Yo</div>
+      <div class="field-label">Mis faltantes</div>
+      <div class="field-hint">Ej: IRQ: 1, 2, 4, 5</div>
+      <textarea id="missing" placeholder="FWC: 6, 7, 17&#10;MEX: 13&#10;BRA: 11, 15&#10;..."></textarea>
+    </div>
+    <div class="field-panel friend">
+      <div class="panel-owner friend">Amigo</div>
+      <div class="field-label">Faltantes del amigo</div>
+      <div class="field-hint">Ej: BRA: 3, 7, 11</div>
+      <textarea id="friendmissing" placeholder="BRA: 3, 7, 11&#10;SCO: 2, 5&#10;..."></textarea>
     </div>
   </div>
 
   <button class="btn" onclick="compare()">
     <span style="width:18px;height:18px;border:1.5px solid currentColor;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">&#10003;</span>
-    Ver fichas que me sirven
+    Comparar fichas
   </button>
 
   <div id="error" class="error-msg"></div>
   <div id="output"></div>
 </main>
 
-<footer>Comparador de fichas Panini &mdash; Hecho con Claude</footer>
+<footer>Comparador de fichas Panini &mdash; by @judricomo</footer>
 
 <script>
-var _matches = null, _repeated = null, _missing = null, _myrepeated = null;
+var _myRep = null, _friendRep = null, _myMis = null, _friendMis = null;
+var _forMe = null, _forFriend = null;
 
 function parseRepeated(text) {
   var result = {}, lines = text.trim().split('\n');
@@ -206,6 +245,20 @@ function parseMissing(text) {
   return result;
 }
 
+function crossMatch(repeated, missing) {
+  // returns { team: [{num, qty}] }
+  var matches = {}, total = 0;
+  Object.keys(missing).forEach(function(team) {
+    if (!repeated[team]) return;
+    var useful = [];
+    missing[team].forEach(function(num) {
+      if (repeated[team][num]) { useful.push({ num: num, qty: repeated[team][num] }); total++; }
+    });
+    if (useful.length) matches[team] = useful;
+  });
+  return { matches: matches, total: total };
+}
+
 function serRep(obj) {
   var lines = [];
   Object.keys(obj).forEach(function(t) {
@@ -224,158 +277,206 @@ function serMis(obj) {
   return lines.join('\n');
 }
 
-function cpRep(obj) {
-  var r = {};
-  Object.keys(obj).forEach(function(t){ r[t] = Object.assign({}, obj[t]); });
-  return r;
+function cpRep(obj) { var r = {}; Object.keys(obj).forEach(function(t){ r[t] = Object.assign({}, obj[t]); }); return r; }
+function cpMis(obj) { var r = {}; Object.keys(obj).forEach(function(t){ r[t] = obj[t].slice(); }); return r; }
+
+function renderTable(matches, chipClass) {
+  if (!Object.keys(matches).length) return '<div class="empty-state" style="padding:1.5rem;">No hay coincidencias.</div>';
+  var html = '<div class="result-table">';
+  Object.keys(matches).forEach(function(team) {
+    html += '<div class="result-row"><span class="team-badge">'+team+'</span><div class="chips">';
+    matches[team].forEach(function(f) {
+      var cls = chipClass + (f.qty > 1 ? ' multi' : '');
+      html += '<span class="chip '+cls+'">'+f.num+(f.qty>1?' \xd7'+f.qty:'')+'</span>';
+    });
+    html += '</div></div>';
+  });
+  html += '</div>';
+  return html;
 }
-function cpMis(obj) {
-  var r = {};
-  Object.keys(obj).forEach(function(t){ r[t] = obj[t].slice(); });
-  return r;
+
+function matchesToCopyText(matches) {
+  var lines = [];
+  Object.keys(matches).forEach(function(team) {
+    var parts = matches[team].map(function(f){ return f.num+'('+f.qty+'x)'; });
+    lines.push(team+': '+parts.join(', '));
+  });
+  return lines.join('\n');
 }
 
 function compare() {
-  var repTxt = document.getElementById('repeated').value;
-  var misTxt = document.getElementById('missing').value;
-  var myTxt  = document.getElementById('myrepeated').value;
+  var myRepTxt    = document.getElementById('myrepeated').value;
+  var friendRepTxt = document.getElementById('repeated').value;
+  var myMisTxt    = document.getElementById('missing').value;
+  var friendMisTxt = document.getElementById('friendmissing').value;
   var out = document.getElementById('output'), err = document.getElementById('error');
   err.textContent = '';
-  if (!repTxt.trim() || !misTxt.trim()) { err.textContent = 'Completa los campos de repetidas del amigo y tus faltantes.'; out.innerHTML = ''; return; }
 
-  _repeated   = parseRepeated(repTxt);
-  _missing    = parseMissing(misTxt);
-  _myrepeated = myTxt.trim() ? parseRepeated(myTxt) : {};
+  if (!friendRepTxt.trim() && !myRepTxt.trim()) {
+    err.textContent = 'Agrega al menos las repetidas de tu amigo o las tuyas.';
+    out.innerHTML = ''; return;
+  }
+  if (!myMisTxt.trim() && !friendMisTxt.trim()) {
+    err.textContent = 'Agrega al menos tus faltantes o las faltantes de tu amigo.';
+    out.innerHTML = ''; return;
+  }
 
-  var matches = {}, totalFichas = 0;
-  Object.keys(_missing).forEach(function(team) {
-    if (!_repeated[team]) return;
-    var useful = [];
-    _missing[team].forEach(function(num) {
-      if (_repeated[team][num]) { useful.push({ num: num, qty: _repeated[team][num] }); totalFichas++; }
-    });
-    if (useful.length) matches[team] = useful;
-  });
+  _myRep     = myRepTxt.trim()     ? parseRepeated(myRepTxt)     : {};
+  _friendRep = friendRepTxt.trim() ? parseRepeated(friendRepTxt) : {};
+  _myMis     = myMisTxt.trim()     ? parseMissing(myMisTxt)      : {};
+  _friendMis = friendMisTxt.trim() ? parseMissing(friendMisTxt)  : {};
 
-  _matches = matches;
+  // What friend gives me (his repeated x my missing)
+  var forMeResult = crossMatch(_friendRep, _myMis);
+  _forMe = forMeResult.matches;
+  var totalForMe = forMeResult.total;
 
-  if (!Object.keys(matches).length) {
-    out.innerHTML = '<div class="empty-state">No hay coincidencias entre las repetidas del amigo y tus faltantes.</div>';
+  // What I give friend (my repeated x friend missing)
+  var forFriendResult = crossMatch(_myRep, _friendMis);
+  _forFriend = forFriendResult.matches;
+  var totalForFriend = forFriendResult.total;
+
+  window._copyForMe     = matchesToCopyText(_forMe);
+  window._copyForFriend = matchesToCopyText(_forFriend);
+
+  var hasForMe     = totalForMe > 0;
+  var hasForFriend = totalForFriend > 0;
+
+  if (!hasForMe && !hasForFriend) {
+    out.innerHTML = '<div class="empty-state">No hay coincidencias en ninguna dirección. Verifica los datos ingresados.</div>';
     return;
   }
 
-  var copyLines = [], tableHtml = '<div class="result-table">';
-  Object.keys(matches).forEach(function(team) {
-    var parts = [];
-    tableHtml += '<div class="result-row"><span class="team-badge">'+team+'</span><div class="chips">';
-    matches[team].forEach(function(f) {
-      tableHtml += '<span class="chip'+(f.qty>1?' multi':'')+'">'+f.num+(f.qty>1?' \xd7'+f.qty:'')+'</span>';
-      parts.push(f.num+'('+f.qty+'x)');
-    });
-    tableHtml += '</div></div>';
-    copyLines.push(team+': '+parts.join(', '));
-  });
-  tableHtml += '</div>';
+  var html = '<div class="results-split">';
 
-  window._copyText = copyLines.join('\n');
-
-  var myTotal = 0;
-  Object.keys(_myrepeated).forEach(function(t){ Object.keys(_myrepeated[t]).forEach(function(n){ myTotal += _myrepeated[t][n]; }); });
-
-  var useMyRep = document.getElementById('useMyRep').checked;
-  var hasMyRep = useMyRep && myTxt.trim() !== '';
-  var swapNote = !useMyRep
-    ? 'El amigo te da <strong>'+totalFichas+'</strong> fichas. Solo se actualizarán sus repetidas y tus faltantes.'
-    : hasMyRep
-      ? 'El amigo te da <strong>'+totalFichas+'</strong> fichas &mdash; tú le das <strong>'+totalFichas+'</strong> de tus repetidas. Tienes <strong>'+myTotal+'</strong> disponibles.'
-      : 'El amigo te da <strong>'+totalFichas+'</strong> fichas. Agrega tus repetidas para poder registrar el cambio.';
-  var canSwap = !useMyRep || (hasMyRep && myTotal >= totalFichas);
-
-  var html = '';
-  html += '<div class="result-header"><span class="result-title">Fichas \u00fatiles del amigo</span><span class="result-summary">'+totalFichas+' ficha(s) en '+Object.keys(matches).length+' selecci\u00f3n(es)</span></div>';
-  html += tableHtml;
-  html += '<div class="legend"><div class="legend-item"><span class="lchip n">14</span> Una copia</div><div class="legend-item"><span class="lchip m">7 \xd73</span> Varias copias</div></div>';
-  html += '<div class="swap-box" style="margin-top:1.5rem;"><div class="swap-title">Resumen del cambio</div><div class="swap-body">'+swapNote+'</div>';
-  if (hasMyRep && !canSwap) html += '<div class="swap-warn">Atenci\u00f3n: te faltan '+(totalFichas - myTotal)+' ficha(s) para completar el cambio.</div>';
-  html += '</div>';
-  html += '<div class="btn-row2">';
-  html += '<button class="btn secondary" id="copyBtn" onclick="copyResult()">Copiar fichas \u00fatiles</button>';
-  if (!useMyRep) {
-    html += '<button class="btn orange" onclick="registerSwap()">Registrar cambio &#8594;</button>';
-  } else if (hasMyRep) {
-    html += '<button class="btn orange" onclick="registerSwap()">Registrar cambio &#8594;</button>';
-  } else {
-    html += '<button class="btn secondary disabled">Registrar cambio (agrega tus repetidas)</button>';
+  // Left: what friend gives me
+  html += '<div class="result-block">';
+  html += '<div class="section-tag me">El amigo me da</div>';
+  html += '<div class="result-header"><span class="result-title">Fichas del amigo que me sirven</span><span class="result-summary">'+totalForMe+' ficha(s)</span></div>';
+  html += renderTable(_forMe, '');
+  if (hasForMe) {
+    html += '<div class="legend"><div class="legend-item"><span class="lchip n">14</span> 1 copia</div><div class="legend-item"><span class="lchip g">7 \xd73</span> Varias copias</div></div>';
   }
   html += '</div>';
+
+  // Right: what I give friend
+  html += '<div class="result-block">';
+  html += '<div class="section-tag friend">Yo le doy al amigo</div>';
+  html += '<div class="result-header"><span class="result-title">Mis fichas que le sirven al amigo</span><span class="result-summary">'+totalForFriend+' ficha(s)</span></div>';
+  html += renderTable(_forFriend, 'blue');
+  if (hasForFriend) {
+    html += '<div class="legend"><div class="legend-item"><span class="lchip n">14</span> 1 copia</div><div class="legend-item"><span class="lchip b">7 \xd73</span> Varias copias</div></div>';
+  }
+  html += '</div>';
+
+  html += '</div>'; // end results-split
+
+  // Swap summary
+  var diff = totalForMe - totalForFriend;
+  var swapMsg = '';
+  if (totalForMe === 0 && totalForFriend === 0) {
+    swapMsg = 'No hay fichas para intercambiar.';
+  } else if (totalForMe > 0 && totalForFriend === 0) {
+    swapMsg = 'El amigo te da <strong>'+totalForMe+'</strong> ficha(s). No hay fichas tuyas que le sirvan a él — el cambio no es parejo.';
+  } else if (totalForMe === 0 && totalForFriend > 0) {
+    swapMsg = 'Tú le das <strong>'+totalForFriend+'</strong> ficha(s) al amigo. No hay fichas de él que te sirvan a ti — el cambio no es parejo.';
+  } else if (diff === 0) {
+    swapMsg = 'Cambio parejo \u2713 &mdash; Cada uno da y recibe <strong>'+totalForMe+'</strong> ficha(s).';
+  } else if (diff > 0) {
+    swapMsg = 'El amigo te da <strong>'+totalForMe+'</strong> y tú le das <strong>'+totalForFriend+'</strong>. Te da <strong>'+diff+'</strong> más que tú a él.';
+  } else {
+    swapMsg = 'El amigo te da <strong>'+totalForMe+'</strong> y tú le das <strong>'+totalForFriend+'</strong>. Tú le das <strong>'+Math.abs(diff)+'</strong> más que él a ti.';
+  }
+
+  var canRegister = hasForMe || hasForFriend;
+
+  html += '<div class="swap-box">';
+  html += '<div class="swap-title">Resumen del cambio</div>';
+  html += '<div class="swap-body">'+swapMsg+'</div>';
+  html += '</div>';
+
+  html += '<div class="btn-row2">';
+  html += '<button class="btn secondary" id="copyBtn" onclick="copyBoth()">Copiar resultado</button>';
+  if (canRegister) {
+    html += '<button class="btn orange" onclick="registerSwap()">Registrar cambio &#8594;</button>';
+  } else {
+    html += '<button class="btn secondary disabled">Registrar cambio</button>';
+  }
+  html += '</div>';
+
   html += '<div id="newInventory"></div>';
   out.innerHTML = html;
 }
 
-function copyResult() {
-  if (!window._copyText) return;
-  navigator.clipboard.writeText(window._copyText).then(function() {
+function copyBoth() {
+  var parts = [];
+  if (window._copyForMe)     parts.push('=== Fichas del amigo que me sirven ===\n' + window._copyForMe);
+  if (window._copyForFriend) parts.push('=== Mis fichas que le sirven al amigo ===\n' + window._copyForFriend);
+  navigator.clipboard.writeText(parts.join('\n\n')).then(function() {
     var btn = document.getElementById('copyBtn'); if (!btn) return;
     btn.textContent = '\u00a1Copiado!';
-    setTimeout(function(){ btn.textContent = 'Copiar fichas \u00fatiles'; }, 2000);
+    setTimeout(function(){ btn.textContent = 'Copiar resultado'; }, 2000);
   });
 }
 
 function registerSwap() {
-  if (!_matches || !_repeated || !_missing || !_myrepeated) return;
-  var newRep  = cpRep(_repeated);
-  var newMis  = cpMis(_missing);
-  var newMyRep = cpRep(_myrepeated);
+  var newFriendRep = cpRep(_friendRep);
+  var newMyMis     = cpMis(_myMis);
+  var newMyRep     = cpRep(_myRep);
+  var newFriendMis = cpMis(_friendMis);
 
-  var totalTaken = 0;
-  Object.keys(_matches).forEach(function(team) {
-    _matches[team].forEach(function(f) {
-      if (newRep[team] && newRep[team][f.num]) {
-        newRep[team][f.num]--;
-        if (newRep[team][f.num] <= 0) delete newRep[team][f.num];
-        if (!Object.keys(newRep[team]).length) delete newRep[team];
+  // Friend gives me: subtract from his repeated, remove from my missing
+  Object.keys(_forMe).forEach(function(team) {
+    _forMe[team].forEach(function(f) {
+      if (newFriendRep[team] && newFriendRep[team][f.num]) {
+        newFriendRep[team][f.num]--;
+        if (newFriendRep[team][f.num] <= 0) delete newFriendRep[team][f.num];
+        if (!Object.keys(newFriendRep[team]).length) delete newFriendRep[team];
       }
-      if (newMis[team]) {
-        newMis[team] = newMis[team].filter(function(n){ return n !== f.num; });
-        if (!newMis[team].length) delete newMis[team];
+      if (newMyMis[team]) {
+        newMyMis[team] = newMyMis[team].filter(function(n){ return n !== f.num; });
+        if (!newMyMis[team].length) delete newMyMis[team];
       }
-      totalTaken++;
     });
   });
 
-  var remaining = totalTaken;
-  var myTeams = Object.keys(newMyRep);
-  for (var i = 0; i < myTeams.length && remaining > 0; i++) {
-    var t = myTeams[i], nums = Object.keys(newMyRep[t]);
-    for (var j = 0; j < nums.length && remaining > 0; j++) {
-      var n = nums[j], give = Math.min(newMyRep[t][n], remaining);
-      newMyRep[t][n] -= give; remaining -= give;
-      if (newMyRep[t][n] <= 0) delete newMyRep[t][n];
-    }
-    if (!Object.keys(newMyRep[t]).length) delete newMyRep[t];
-  }
+  // I give friend: subtract from my repeated, remove from friend missing
+  Object.keys(_forFriend).forEach(function(team) {
+    _forFriend[team].forEach(function(f) {
+      if (newMyRep[team] && newMyRep[team][f.num]) {
+        newMyRep[team][f.num]--;
+        if (newMyRep[team][f.num] <= 0) delete newMyRep[team][f.num];
+        if (!Object.keys(newMyRep[team]).length) delete newMyRep[team];
+      }
+      if (newFriendMis[team]) {
+        newFriendMis[team] = newFriendMis[team].filter(function(n){ return n !== f.num; });
+        if (!newFriendMis[team].length) delete newFriendMis[team];
+      }
+    });
+  });
 
-  var nRepTxt   = serRep(newRep)   || '(sin repetidas)';
-  var nMisTxt   = serMis(newMis)   || '(sin faltantes)';
-  var nMyRepTxt = serRep(newMyRep) || '(sin repetidas)';
+  var nMyRepTxt     = serRep(newMyRep)     || '(sin repetidas)';
+  var nFriendRepTxt = serRep(newFriendRep) || '(sin repetidas)';
+  var nMyMisTxt     = serMis(newMyMis)     || '(sin faltantes)';
+  var nFriendMisTxt = serMis(newFriendMis) || '(sin faltantes)';
 
-  var withMyRep = document.getElementById('useMyRep').checked && myTxt.trim() !== '';
-  var gridCols  = withMyRep ? '1fr 1fr 1fr' : '1fr 1fr';
   var html = '<hr class="divider">';
   html += '<div class="result-header"><span class="result-title">Nuevo inventario tras el cambio</span></div>';
-  html += '<div class="inv-grid" style="grid-template-columns:'+gridCols+'">';
-  html += '<div class="inv-block"><div class="inv-block-head">Repetidas del amigo</div><textarea id="nRepTA">'+nRepTxt+'</textarea></div>';
-  html += '<div class="inv-block"><div class="inv-block-head">Mis faltantes</div><textarea id="nMisTA">'+nMisTxt+'</textarea></div>';
-  if (withMyRep) html += '<div class="inv-block"><div class="inv-block-head">Mis repetidas</div><textarea id="nMyRepTA">'+nMyRepTxt+'</textarea></div>';
+
+  html += '<div class="inv-grid4">';
+  html += '<div class="inv-block"><div class="inv-block-head me">Mis repetidas</div><textarea id="nMyRepTA">'+nMyRepTxt+'</textarea></div>';
+  html += '<div class="inv-block"><div class="inv-block-head me">Mis faltantes</div><textarea id="nMyMisTA">'+nMyMisTxt+'</textarea></div>';
+  html += '<div class="inv-block"><div class="inv-block-head friend">Repetidas del amigo</div><textarea id="nFriRepTA">'+nFriendRepTxt+'</textarea></div>';
+  html += '<div class="inv-block"><div class="inv-block-head friend">Faltantes del amigo</div><textarea id="nFriMisTA">'+nFriendMisTxt+'</textarea></div>';
   html += '</div>';
-  html += '<div class="btn-row2" style="margin-top:12px;">';
-  html += '<div style="display:flex;flex-direction:column;gap:8px;">';
-  html += '<button class="btn secondary" onclick="copyNew(\'nRepTA\',this)">Copiar repetidas del amigo</button>';
-  html += '<button class="btn secondary" onclick="copyNew(\'nMisTA\',this)">Copiar mis faltantes</button>';
-  if (withMyRep) html += '<button class="btn secondary" onclick="copyNew(\'nMyRepTA\',this)">Copiar mis repetidas</button>';
+
+  html += '<div class="copy-grid" style="margin-top:10px;">';
+  html += '<button class="btn secondary" onclick="copyNew(\'nMyRepTA\',this)">Copiar mis repetidas</button>';
+  html += '<button class="btn secondary" onclick="copyNew(\'nMyMisTA\',this)">Copiar mis faltantes</button>';
+  html += '<button class="btn secondary" onclick="copyNew(\'nFriRepTA\',this)">Copiar repetidas del amigo</button>';
+  html += '<button class="btn secondary" onclick="copyNew(\'nFriMisTA\',this)">Copiar faltantes del amigo</button>';
   html += '</div>';
-  html += '<button class="btn orange" style="align-self:stretch;" onclick="applyNew()">Usar como nuevo punto de partida &#8594;</button>';
-  html += '</div>';
+  html += '<button class="btn orange" style="margin-top:10px;" onclick="applyNew()">Usar como nuevo punto de partida &#8594;</button>';
 
   document.getElementById('newInventory').innerHTML = html;
   document.getElementById('newInventory').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -390,20 +491,17 @@ function copyNew(id, btn) {
 }
 
 function applyNew() {
-  var r = document.getElementById('nRepTA'), m = document.getElementById('nMisTA'), mr = document.getElementById('nMyRepTA');
-  if (!r || !m) return;
-  document.getElementById('repeated').value   = r.value  === '(sin repetidas)' ? '' : r.value;
-  document.getElementById('missing').value    = m.value  === '(sin faltantes)'  ? '' : m.value;
-  if (mr) document.getElementById('myrepeated').value = mr.value === '(sin repetidas)' ? '' : mr.value;
+  var r  = document.getElementById('nMyRepTA');
+  var m  = document.getElementById('nMyMisTA');
+  var fr = document.getElementById('nFriRepTA');
+  var fm = document.getElementById('nFriMisTA');
+  if (r)  document.getElementById('myrepeated').value   = r.value  === '(sin repetidas)' ? '' : r.value;
+  if (m)  document.getElementById('missing').value      = m.value  === '(sin faltantes)'  ? '' : m.value;
+  if (fr) document.getElementById('repeated').value     = fr.value === '(sin repetidas)' ? '' : fr.value;
+  if (fm) document.getElementById('friendmissing').value = fm.value === '(sin faltantes)'  ? '' : fm.value;
   document.getElementById('output').innerHTML = '';
   document.getElementById('error').textContent = '';
   window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function toggleMyRep() {
-  var chk = document.getElementById('useMyRep');
-  var field = document.getElementById('myRepField');
-  if (field) field.classList.toggle('hidden', !chk.checked);
 }
 </script>
 </body>
