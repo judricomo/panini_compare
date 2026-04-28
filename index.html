@@ -177,30 +177,42 @@
     </div>
   </div>
 
+  <!-- Names -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;">
+    <div>
+      <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#D4501A;font-family:'Archivo Narrow',sans-serif;margin-bottom:6px;">Tu nombre</div>
+      <input id="myName" type="text" placeholder="Ej: Carlos" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;background:var(--surface);color:var(--text);font-family:'Archivo',sans-serif;" oninput="updateLabels()">
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#185FA5;font-family:'Archivo Narrow',sans-serif;margin-bottom:6px;">Nombre del amigo</div>
+      <input id="friendName" type="text" placeholder="Ej: Juan" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;background:var(--surface);color:var(--text);font-family:'Archivo',sans-serif;" oninput="updateLabels()">
+    </div>
+  </div>
+
   <!-- 2x2 input grid -->
   <div class="grid2x2">
     <!-- Row 1: Repetidas -->
     <div class="field-panel mine">
-      <div class="panel-owner me">Yo</div>
+      <div class="panel-owner me" id="labelMe">Yo</div>
       <div class="field-label">Mis repetidas</div>
       <div class="field-hint">Ej: BRA: 3(2x), 7(1x)</div>
       <textarea id="myrepeated" placeholder="BRA: 3(2x), 7(1x)&#10;SCO: 11(3x)&#10;..."></textarea>
     </div>
     <div class="field-panel friend">
-      <div class="panel-owner friend">Amigo</div>
+      <div class="panel-owner friend" id="labelFriend">Amigo</div>
       <div class="field-label">Repetidas del amigo</div>
       <div class="field-hint">Ej: IRQ: 4(2x), 5(1x)</div>
       <textarea id="repeated" placeholder="FWC: 00(3x), 1(3x)&#10;MEX: 2(1x), 4(1x)&#10;..."></textarea>
     </div>
     <!-- Row 2: Faltantes -->
     <div class="field-panel mine">
-      <div class="panel-owner me">Yo</div>
+      <div class="panel-owner me" id="labelMe2">Yo</div>
       <div class="field-label">Mis faltantes</div>
       <div class="field-hint">Ej: IRQ: 1, 2, 4, 5</div>
       <textarea id="missing" placeholder="FWC: 6, 7, 17&#10;MEX: 13&#10;BRA: 11, 15&#10;..."></textarea>
     </div>
     <div class="field-panel friend">
-      <div class="panel-owner friend">Amigo</div>
+      <div class="panel-owner friend" id="labelFriend2">Amigo</div>
       <div class="field-label">Faltantes del amigo</div>
       <div class="field-hint">Ej: BRA: 3, 7, 11</div>
       <textarea id="friendmissing" placeholder="BRA: 3, 7, 11&#10;SCO: 2, 5&#10;..."></textarea>
@@ -298,13 +310,35 @@ function renderTable(matches, chipClass) {
 function matchesToCopyText(matches) {
   var lines = [];
   Object.keys(matches).forEach(function(team) {
-    var parts = matches[team].map(function(f){ return f.num+'('+f.qty+'x)'; });
+    var parts = matches[team].map(function(f){ return f.num; });
     lines.push(team+': '+parts.join(', '));
   });
   return lines.join('\n');
 }
 
+function matchesTotal(matches) {
+  var total = 0;
+  Object.keys(matches).forEach(function(team) { total += matches[team].length; });
+  return total;
+}
+
+function getName(id, fallback) {
+  var el = document.getElementById(id);
+  if (!el) return fallback;
+  var v = el.value ? el.value.trim() : '';
+  return v !== '' ? v : fallback;
+}
+
+function updateLabels() {
+  var me = getName('myName', 'Yo');
+  var fr = getName('friendName', 'Amigo');
+  ['labelMe','labelMe2'].forEach(function(id){ var el=document.getElementById(id); if(el) el.textContent=me; });
+  ['labelFriend','labelFriend2'].forEach(function(id){ var el=document.getElementById(id); if(el) el.textContent=fr; });
+}
+
 function compare() {
+  var me = getName('myName', 'Yo');
+  var fr = getName('friendName', 'tu amigo');
   var myRepTxt    = document.getElementById('myrepeated').value;
   var friendRepTxt = document.getElementById('repeated').value;
   var myMisTxt    = document.getElementById('missing').value;
@@ -351,8 +385,8 @@ function compare() {
 
   // Left: what friend gives me
   html += '<div class="result-block">';
-  html += '<div class="section-tag me">El amigo me da</div>';
-  html += '<div class="result-header"><span class="result-title">Fichas del amigo que me sirven</span><span class="result-summary">'+totalForMe+' ficha(s)</span></div>';
+  html += '<div class="section-tag me">'+ fr +' me da</div>';
+  html += '<div class="result-header"><span class="result-title">Fichas de '+ fr +' que me sirven</span><span class="result-summary">'+totalForMe+' ficha(s)</span></div>';
   html += renderTable(_forMe, '');
   if (hasForMe) {
     html += '<div class="legend"><div class="legend-item"><span class="lchip n">14</span> 1 copia</div><div class="legend-item"><span class="lchip g">7 \xd73</span> Varias copias</div></div>';
@@ -361,8 +395,8 @@ function compare() {
 
   // Right: what I give friend
   html += '<div class="result-block">';
-  html += '<div class="section-tag friend">Yo le doy al amigo</div>';
-  html += '<div class="result-header"><span class="result-title">Mis fichas que le sirven al amigo</span><span class="result-summary">'+totalForFriend+' ficha(s)</span></div>';
+  html += '<div class="section-tag friend">'+ me +' le da a '+ fr +'</div>';
+  html += '<div class="result-header"><span class="result-title">Fichas de '+ me +' que le sirven a '+ fr +'</span><span class="result-summary">'+totalForFriend+' ficha(s)</span></div>';
   html += renderTable(_forFriend, 'blue');
   if (hasForFriend) {
     html += '<div class="legend"><div class="legend-item"><span class="lchip n">14</span> 1 copia</div><div class="legend-item"><span class="lchip b">7 \xd73</span> Varias copias</div></div>';
@@ -377,15 +411,15 @@ function compare() {
   if (totalForMe === 0 && totalForFriend === 0) {
     swapMsg = 'No hay fichas para intercambiar.';
   } else if (totalForMe > 0 && totalForFriend === 0) {
-    swapMsg = 'El amigo te da <strong>'+totalForMe+'</strong> ficha(s). No hay fichas tuyas que le sirvan a él — el cambio no es parejo.';
+    swapMsg = fr+' le da <strong>'+totalForMe+'</strong> ficha(s) a '+me+'. No hay fichas de '+me+' que le sirvan a '+fr+' — el cambio no es parejo.';
   } else if (totalForMe === 0 && totalForFriend > 0) {
-    swapMsg = 'Tú le das <strong>'+totalForFriend+'</strong> ficha(s) al amigo. No hay fichas de él que te sirvan a ti — el cambio no es parejo.';
+    swapMsg = me+' le da <strong>'+totalForFriend+'</strong> ficha(s) a '+fr+'. No hay fichas de '+fr+' que le sirvan a '+me+' — el cambio no es parejo.';
   } else if (diff === 0) {
-    swapMsg = 'Cambio parejo \u2713 &mdash; Cada uno da y recibe <strong>'+totalForMe+'</strong> ficha(s).';
+    swapMsg = 'Cambio parejo \u2713 &mdash; '+fr+' le da <strong>'+totalForMe+'</strong> a '+me+', y '+me+' le da <strong>'+totalForFriend+'</strong> a '+fr+'.';
   } else if (diff > 0) {
-    swapMsg = 'El amigo te da <strong>'+totalForMe+'</strong> y tú le das <strong>'+totalForFriend+'</strong>. Te da <strong>'+diff+'</strong> más que tú a él.';
+    swapMsg = fr+' le da <strong>'+totalForMe+'</strong> a '+me+', y '+me+' le da <strong>'+totalForFriend+'</strong> a '+fr+'. '+fr+' da <strong>'+diff+'</strong> más.';
   } else {
-    swapMsg = 'El amigo te da <strong>'+totalForMe+'</strong> y tú le das <strong>'+totalForFriend+'</strong>. Tú le das <strong>'+Math.abs(diff)+'</strong> más que él a ti.';
+    swapMsg = fr+' le da <strong>'+totalForMe+'</strong> a '+me+', y '+me+' le da <strong>'+totalForFriend+'</strong> a '+fr+'. '+me+' da <strong>'+Math.abs(diff)+'</strong> más.';
   }
 
   var canRegister = hasForMe || hasForFriend;
@@ -410,8 +444,12 @@ function compare() {
 
 function copyBoth() {
   var parts = [];
-  if (window._copyForMe)     parts.push('=== Fichas del amigo que me sirven ===\n' + window._copyForMe);
-  if (window._copyForFriend) parts.push('=== Mis fichas que le sirven al amigo ===\n' + window._copyForFriend);
+  var me = getName('myName', 'Yo');
+  var fr = getName('friendName', 'Amigo');
+  var totalMe = matchesTotal(_forMe), totalFriend = matchesTotal(_forFriend);
+  if (window._copyForMe)     parts.push('=== ' + fr + ' le da a ' + me + ' ===\n' + window._copyForMe);
+  if (window._copyForFriend) parts.push('=== ' + me + ' le da a ' + fr + ' ===\n' + window._copyForFriend);
+  parts.push('Total recibe ' + me + ': ' + totalMe + ' | Total recibe ' + fr + ': ' + totalFriend);
   navigator.clipboard.writeText(parts.join('\n\n')).then(function() {
     var btn = document.getElementById('copyBtn'); if (!btn) return;
     btn.textContent = '\u00a1Copiado!';
