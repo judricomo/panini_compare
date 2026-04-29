@@ -482,7 +482,10 @@ function parseRepeated(text) {
   var result={}, lines=text.trim().split('\n');
   for(var i=0;i<lines.length;i++){
     var ci=lines[i].indexOf(':'); if(ci<0) continue;
-    var team=lines[i].slice(0,ci).trim().toUpperCase();
+    var teamRaw=lines[i].slice(0,ci).trim();
+    // Extract only letters and numbers from team code (removes emojis, spaces, special chars)
+    var team=(teamRaw.match(/[A-Za-z0-9]+/g)||[]).join('').toUpperCase();
+    if(!team) continue;
     var rest=lines[i].slice(ci+1), st={}, re=/(\w+)\((\d+)x\)/g, m;
     while((m=re.exec(rest))!==null) st[m[1]]=parseInt(m[2]);
     if(Object.keys(st).length) result[team]=st;
@@ -494,7 +497,10 @@ function parseMissing(text) {
   var result={}, lines=text.trim().split('\n');
   for(var i=0;i<lines.length;i++){
     var ci=lines[i].indexOf(':'); if(ci<0) continue;
-    var team=lines[i].slice(0,ci).trim().toUpperCase();
+    var teamRaw=lines[i].slice(0,ci).trim();
+    // Extract only letters and numbers from team code (removes emojis, spaces, special chars)
+    var team=(teamRaw.match(/[A-Za-z0-9]+/g)||[]).join('').toUpperCase();
+    if(!team) continue;
     var nums=lines[i].slice(ci+1).match(/\w+/g);
     if(nums) result[team]=nums;
   }
